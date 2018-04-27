@@ -5,10 +5,15 @@ const app = express();
 // const layout = require ('./views/layout'); 
 const serve = require('express-static');
 const {db} = require('./models');
-const wiki = require('./routes/wiki');
+const wikiRouter = require('./routes/wiki');
+const userRouter = require("./routes/user");
+
+
 
 app.use(morgan("dev"));
-app.use('/wiki',wiki);
+app.use('/wiki',wikiRouter);
+app.use("/user", userRouter);
+
 
 db.authenticate().then(() => {
   console.log("connected to the database");
